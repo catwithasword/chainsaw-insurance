@@ -3,15 +3,35 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { useState } from "react"
+import { signIn, useSession } from "next-auth/react"
+import { useRouter } from "next/navigation"
 import type React from "react"
 
 export default function HeroSection() {
+  const { data: session } = useSession()
+  const router = useRouter()
   const [formData, setFormData] = useState({
     currentAge: "",
     retirementAge: "",
     initialInvestment: "",
     monthlyContribution: "",
   })
+
+  const handleExploreAnnuities = () => {
+    if (session) {
+      router.push("/dashboard")
+    } else {
+      signIn("google", { callbackUrl: "/dashboard" })
+    }
+  }
+
+  const handleCalculateReturns = () => {
+    if (session) {
+      router.push("/dashboard")
+    } else {
+      signIn("google", { callbackUrl: "/dashboard" })
+    }
+  }
 
   // Function to handle numeric input only
   const handleNumericInput = (e: React.ChangeEvent<HTMLInputElement>, field: string) => {
@@ -49,11 +69,15 @@ export default function HeroSection() {
       e.preventDefault()
     }
   }
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     console.log("Form Data:", formData)
     // Handle form submission here
+    if (session) {
+      router.push("/dashboard")
+    } else {
+      signIn("google", { callbackUrl: "/dashboard" })
+    }
   }
 
   return (
@@ -68,15 +92,19 @@ export default function HeroSection() {
             <p className="text-xl mb-8 leading-relaxed opacity-90">
               Build a reliable income stream for your golden years with our comprehensive annuity insurance plans.
               Guaranteed returns, tax advantages, and lifetime income options.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 px-8 py-4">
-                Explore Annuities
+            </p>            <div className="flex flex-col sm:flex-row gap-4">
+              <Button 
+                size="lg" 
+                className="bg-accent text-accent-foreground hover:bg-accent/90 px-8 py-4"
+                onClick={handleExploreAnnuities}
+              >
+                {session ? "View Dashboard" : "Explore Annuities"}
               </Button>
               <Button
                 size="lg"
                 variant="outline"
                 className="border-accent text-accent hover:bg-accent hover:text-accent-foreground px-8 py-4"
+                onClick={handleCalculateReturns}
               >
                 Calculate Returns
               </Button>
@@ -144,9 +172,11 @@ export default function HeroSection() {
                   <option value="variable">Variable Annuity</option>
                   <option value="indexed">Indexed Annuity</option>
                   <option value="immediate">Immediate Annuity</option>
-                </select>
-                <Button className="w-full bg-accent text-accent-foreground hover:bg-accent/90 py-3">
-                  Calculate My Returns
+                </select>                <Button 
+                  type="submit"
+                  className="w-full bg-accent text-accent-foreground hover:bg-accent/90 py-3"
+                >
+                  {session ? "View My Dashboard" : "Calculate My Returns"}
                 </Button>
               </form>
             </div>
