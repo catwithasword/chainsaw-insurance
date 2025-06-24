@@ -474,12 +474,30 @@ export default function ChainsawAnnuityPage() {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold mb-6">Ready to Secure Your Retirement?</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
-            Get a personalized annuity quote and start building your guaranteed retirement income today.
+            Please provide your email address below and our team will reach out to you.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 px-8 py-4">
-              Get Free Quote
-            </Button>
+          {/* Email Input Form */}
+          <div className="max-w-md mx-auto">
+            <form
+              className="flex flex-col sm:flex-row gap-3"
+              onSubmit={(e) => {
+                e.preventDefault()
+                const formData = new FormData(e.target as HTMLFormElement)
+                const email = formData.get("email")
+                console.log("Email submitted:", email)
+                // Handle email submission here
+              }}
+            >
+              <div className="flex-1">
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Enter your email address"
+                  required
+                  className="w-full px-4 py-4 rounded-lg border-2 border-white/20 bg-white/10 text-white placeholder:text-white/70 focus:outline-none focus:border-white focus:bg-white/20 transition-all duration-200"
+                />
+              </div>
+            </form>
           </div>
         </div>
       </section>
@@ -487,16 +505,16 @@ export default function ChainsawAnnuityPage() {
       {/* Footer */}
       <footer id="contact" className="bg-accent-dark text-primary-foreground py-16">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
-              <div className="flex items-center space-x-2 mb-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center md:justify-items-start">
+            <div className="text-center md:text-left">
+              <div className="flex items-center justify-center md:justify-start space-x-2 mb-4">
                 <Shield className="h-8 w-8 text-accent" />
                 <span className="text-2xl font-bold">Chainsaw</span>
               </div>
-              <p className="opacity-80 mb-4">
+              <p className="opacity-80 mb-4 max-w-sm">
                 Securing retirements for over 50 years with guaranteed annuity solutions and expert financial guidance.
               </p>
-              <div className="flex space-x-4">
+              <div className="flex space-x-4 justify-center md:justify-start">
                 <div className="w-10 h-10 bg-accent rounded-full flex items-center justify-center">
                   <span className="text-accent-foreground font-bold">f</span>
                 </div>
@@ -508,18 +526,19 @@ export default function ChainsawAnnuityPage() {
                 </div>
               </div>
             </div>
-            <div>
+
+            <div className="text-center md:text-left">
               <h3 className="text-lg font-semibold mb-4 text-accent">Contact</h3>
               <div className="space-y-3 opacity-80">
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center justify-center md:justify-start space-x-2">
                   <Phone className="h-4 w-4 text-accent" />
                   <span>1-800-CHAINSAW</span>
                 </div>
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center justify-center md:justify-start space-x-2">
                   <Mail className="h-4 w-4 text-accent" />
                   <span>annuities@chainsaw.com</span>
                 </div>
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center justify-center md:justify-start space-x-2">
                   <MapPin className="h-4 w-4 text-accent" />
                   <span>Bangkok, Thailand</span>
                 </div>
