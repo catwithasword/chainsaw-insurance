@@ -161,7 +161,7 @@ export default function ChainsawAnnuityPage() {
                     />
                     <Input
                       type="number"
-                      placeholder="Retirement Age (number)"
+                      placeholder="Retirement Age"
                       value={formData.retirementAge}
                       onChange={(e) => handleNumericInput(e, "retirementAge")}
                       onKeyDown={handleKeyPress}
