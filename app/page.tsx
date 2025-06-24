@@ -1,7 +1,11 @@
+"use client"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
+import type React from "react"
+
+import { useState } from "react"
 import {
   Shield,
   TrendingUp,
@@ -16,6 +20,55 @@ import {
 } from "lucide-react"
 
 export default function ChainsawAnnuityPage() {
+  const [formData, setFormData] = useState({
+    currentAge: "",
+    retirementAge: "",
+    initialInvestment: "",
+    monthlyContribution: "",
+  })
+  // Function to handle numeric input only
+  const handleNumericInput = (e: React.ChangeEvent<HTMLInputElement>, field: string) => {
+    const value = e.target.value
+    // Allow only numbers and decimal point
+    const numericValue = value.replace(/[^0-9.]/g, "")
+
+    // Prevent multiple decimal points
+    const parts = numericValue.split(".")
+    const finalValue = parts.length > 2 ? parts[0] + "." + parts.slice(1).join("") : numericValue
+
+    setFormData((prev) => ({
+      ...prev,
+      [field]: finalValue,
+    }))
+  }
+
+  // Function to handle key press (prevent non-numeric characters)
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const allowedKeys = [
+      "Backspace",
+      "Delete",
+      "Tab",
+      "Escape",
+      "Enter",
+      "ArrowLeft",
+      "ArrowRight",
+      "ArrowUp",
+      "ArrowDown",
+    ]
+    const isNumber = /[0-9]/.test(e.key)
+    const isDecimal = e.key === "."
+
+    if (!isNumber && !isDecimal && !allowedKeys.includes(e.key)) {
+      e.preventDefault()
+    }
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    console.log("Form Data:", formData)
+    // Handle form submission here
+  }
+
   return (
     <div className="min-h-screen bg-neutral-light">
       {/* Header */}
@@ -97,20 +150,40 @@ export default function ChainsawAnnuityPage() {
                 <form className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <Input
+                      type="number"
                       placeholder="Your Age"
+                      value={formData.currentAge}
+                      onChange={(e) => handleNumericInput(e, "currentAge")}
+                      onKeyDown={handleKeyPress}
+                      min="0"
+                      max="200"
                       className="border-2 border-neutral-gray focus:border-accent bg-white text-primary placeholder:text-primary/50"
                     />
                     <Input
-                      placeholder="Retirement Age"
+                      type="number"
+                      placeholder="Retirement Age (number)"
+                      value={formData.retirementAge}
+                      onChange={(e) => handleNumericInput(e, "retirementAge")}
+                      onKeyDown={handleKeyPress}
+                      min="0"
+                      max="200"
                       className="border-2 border-neutral-gray focus:border-accent bg-white text-primary placeholder:text-primary/50"
                     />
                   </div>
                   <Input
+                    type="number"
                     placeholder="Initial Investment ($)"
+                    value={formData.initialInvestment}
+                    onChange={(e) => handleNumericInput(e, "initialInvestment")}
+                    onKeyDown={handleKeyPress}
                     className="border-2 border-neutral-gray focus:border-accent bg-white text-primary placeholder:text-primary/50"
                   />
                   <Input
+                    type="number"
                     placeholder="Monthly Contribution ($)"
+                    value={formData.monthlyContribution}
+                    onChange={(e) => handleNumericInput(e, "monthlyContribution")}
+                    onKeyDown={handleKeyPress}
                     className="border-2 border-neutral-gray focus:border-accent bg-white text-primary placeholder:text-primary/50"
                   />
                   <select className="w-full px-3 py-2 border-2 border-neutral-gray rounded-md bg-white text-primary focus:border-accent focus:outline-none">
@@ -407,13 +480,6 @@ export default function ChainsawAnnuityPage() {
             <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 px-8 py-4">
               Get Free Quote
             </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-white text-white hover:bg-white hover:text-primary px-8 py-4"
-            >
-              Schedule Consultation
-            </Button>
           </div>
         </div>
       </section>
@@ -443,56 +509,6 @@ export default function ChainsawAnnuityPage() {
               </div>
             </div>
             <div>
-              <h3 className="text-lg font-semibold mb-4 text-accent">Annuity Products</h3>
-              <ul className="space-y-2 opacity-80">
-                <li>
-                  <a href="#" className="hover:text-accent transition-colors">
-                    Fixed Annuities
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-accent transition-colors">
-                    Variable Annuities
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-accent transition-colors">
-                    Indexed Annuities
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-accent transition-colors">
-                    Immediate Annuities
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4 text-accent">Resources</h3>
-              <ul className="space-y-2 opacity-80">
-                <li>
-                  <a href="#" className="hover:text-accent transition-colors">
-                    Retirement Calculator
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-accent transition-colors">
-                    Annuity Guide
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-accent transition-colors">
-                    Tax Benefits
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-accent transition-colors">
-                    FAQ
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
               <h3 className="text-lg font-semibold mb-4 text-accent">Contact</h3>
               <div className="space-y-3 opacity-80">
                 <div className="flex items-center space-x-2">
@@ -511,7 +527,7 @@ export default function ChainsawAnnuityPage() {
             </div>
           </div>
           <div className="border-t border-primary/20 mt-12 pt-8 text-center opacity-60">
-            <p>&copy; 2024 Chainsaw Annuity Insurance. All rights reserved. | Privacy Policy | Terms of Service</p>
+            <p>&copy; 2025 Chainsaw Annuity Insurance. All rights reserved. | Privacy Policy | Terms of Service</p>
           </div>
         </div>
       </footer>
