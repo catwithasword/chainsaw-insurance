@@ -527,7 +527,7 @@ export default function ChainsawAnnuityPage() {
             </div>
           </div>
           <div className="border-t border-primary/20 mt-12 pt-8 text-center opacity-60">
-            <p>&copy; 2025 Chainsaw Annuity Insurance. All rights reserved. | Privacy Policy | Terms of Service</p>
+            <p>&copy; 2025 Chainsaw Annuity Insurance. All rights reserved.</p>
           </div>
         </div>
       </footer>
