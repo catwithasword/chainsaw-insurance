@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { CheckCircle, Shield, Calculator, TrendingUp} from "lucide-react"
+import { CheckCircle, Star, Zap, Heart } from "lucide-react"
 
 export default function AnnuityTypesSection() {
   return (
@@ -15,7 +15,7 @@ export default function AnnuityTypesSection() {
           <Card className="border-neutral-gray hover:shadow-lg transition-all hover:border-accent/50 group">
             <CardHeader className="text-center">
               <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-accent/20 transition-colors">
-                <Shield className="h-8 w-8 text-accent" />
+                <Star className="h-8 w-8 text-accent" />
               </div>
               <CardTitle className="text-primary">Plan A</CardTitle>
             </CardHeader>
@@ -40,7 +40,7 @@ export default function AnnuityTypesSection() {
           <Card className="border-neutral-gray hover:shadow-lg transition-all hover:border-accent/50 group">
             <CardHeader className="text-center">
               <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-accent/20 transition-colors">
-                <TrendingUp className="h-8 w-8 text-accent" />
+                <Zap className="h-8 w-8 text-accent" />
               </div>
               <CardTitle className="text-primary">Plan B</CardTitle>
             </CardHeader>
@@ -65,7 +65,7 @@ export default function AnnuityTypesSection() {
           <Card className="border-neutral-gray hover:shadow-lg transition-all hover:border-accent/50 group">
             <CardHeader className="text-center">
               <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-accent/20 transition-colors">
-                <Calculator className="h-8 w-8 text-accent" />
+                <Heart className="h-8 w-8 text-accent" />
               </div>
               <CardTitle className="text-primary">Plan C</CardTitle>
             </CardHeader>

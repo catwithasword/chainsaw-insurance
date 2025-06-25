@@ -7,6 +7,7 @@ import type React from "react"
 
 import { useState } from "react"
 import { Input } from "@/components/ui/input"
+import { Send } from "lucide-react"
 
 export default function CTASection() {
   const { data: session } = useSession()
@@ -46,18 +47,19 @@ export default function CTASection() {
     <section className="py-20 bg-gradient-to-r from-primary to-accent-dark text-primary-foreground">
       <div className="container mx-auto px-4 text-center">
         <h2 className="text-4xl font-bold mb-6">Ready to Secure Your Retirement?</h2>
-        <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
-          Provide your email for us to reach out to you.
-        </p>
+        <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">Provide your email for us to reach out to you.</p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Input
-            type="email"
-            placeholder="Enter your email address"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="flex-1 border-2 border-neutral-gray focus:border-accent focus:outline-none bg-white text-primary placeholder:text-primary/50 px-4 py-3"
-            required
-          />
+          <div className="relative flex-1 max-w-md mx-auto sm:mx-0">
+            <Input
+              type="email"
+              placeholder="Enter your email address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="border-2 border-neutral-gray focus:border-accent focus:outline-none bg-white text-primary placeholder:text-primary/50 px-4 py-3 pr-12"
+              required
+            />
+            <Send className="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-primary/50" />
+          </div>
         </div>
       </div>
     </section>

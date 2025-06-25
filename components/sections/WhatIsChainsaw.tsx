@@ -5,7 +5,7 @@ export default function WhatIsChainsaw() {
     <section id="about" className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-primary mb-4">What is Chainsaw?</h2>
+          <h2 className="text-4xl font-bold text-primary mb-4">What is PensionDAO?</h2>
           <p className="text-xl text-primary/70 max-w-3xl mx-auto">
             Your trusted partner in retirement planning, providing secure and reliable annuity solutions
           </p>
@@ -19,7 +19,7 @@ export default function WhatIsChainsaw() {
               life insurance coverage without compromising benefits from either aspect.
             </p>
             <p className="text-primary/70 text-lg leading-relaxed">
-              At Chainsaw, we believe everyone deserves a secure and comfortable retirement. We specialize in creating
+              At PensionDAO, we believe everyone deserves a secure and comfortable retirement. We specialize in creating
               personalized annuity solutions that protect your financial future while providing guaranteed income
               streams when you need them most.
             </p>
