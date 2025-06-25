@@ -1,14 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 interface PortfolioChartProps {
   data?: Array<{ date: string; value: number }>
-  timeframe?: '7D' | '30D' | '1Y'
+  initialTimeframe?: '7D' | '30D' | '1Y'
 }
 
 const PortfolioChart: React.FC<PortfolioChartProps> = ({ 
-  data = generateMockData(), 
-  timeframe = '1Y' 
+  data, 
+  initialTimeframe = '1Y' 
 }) => {
+  const [timeframe, setTimeframe] = useState<'7D' | '30D' | '1Y'>(initialTimeframe)
+  
+  // Use provided data or generate mock data based on timeframe
+  const chartData = data || generateMockData(timeframe)
   // Generate SVG path for the chart
   const generatePath = (points: Array<{ x: number; y: number }>) => {
     if (points.length === 0) return ''
@@ -28,12 +32,12 @@ const PortfolioChart: React.FC<PortfolioChartProps> = ({
   const chartHeight = 200
   const padding = 20
   
-  const maxValue = Math.max(...data.map(d => d.value))
-  const minValue = Math.min(...data.map(d => d.value))
+  const maxValue = Math.max(...chartData.map(d => d.value))
+  const minValue = Math.min(...chartData.map(d => d.value))
   const valueRange = maxValue - minValue
   
-  const points = data.map((d, index) => ({
-    x: padding + (index / (data.length - 1)) * (chartWidth - 2 * padding),
+  const points = chartData.map((d, index) => ({
+    x: padding + (index / (chartData.length - 1)) * (chartWidth - 2 * padding),
     y: chartHeight - padding - ((d.value - minValue) / valueRange) * (chartHeight - 2 * padding)
   }))
   
@@ -50,13 +54,22 @@ const PortfolioChart: React.FC<PortfolioChartProps> = ({
       <div className="flex justify-between items-center mb-6">
         <h3 className="text-lg font-semibold">Portfolio Net Value</h3>
         <div className="flex space-x-2">
-          <button className={`px-3 py-1 rounded text-sm ${timeframe === '7D' ? 'bg-gray-600' : 'bg-gray-400'}`}>
+          <button 
+            onClick={() => setTimeframe('7D')}
+            className={`px-3 py-1 rounded text-sm ${timeframe === '7D' ? 'bg-gray-600' : 'bg-gray-400'}`}
+          >
             7D
           </button>
-          <button className={`px-3 py-1 rounded text-sm ${timeframe === '30D' ? 'bg-gray-600' : 'bg-gray-400'}`}>
+          <button 
+            onClick={() => setTimeframe('30D')}
+            className={`px-3 py-1 rounded text-sm ${timeframe === '30D' ? 'bg-gray-600' : 'bg-gray-400'}`}
+          >
             30D
           </button>
-          <button className={`px-3 py-1 rounded text-sm ${timeframe === '1Y' ? 'bg-gray-600' : 'bg-gray-400'}`}>
+          <button 
+            onClick={() => setTimeframe('1Y')}
+            className={`px-3 py-1 rounded text-sm ${timeframe === '1Y' ? 'bg-gray-600' : 'bg-gray-400'}`}
+          >
             1Y
           </button>
         </div>
@@ -126,41 +139,76 @@ const PortfolioChart: React.FC<PortfolioChartProps> = ({
 
       {/* Date labels */}
       <div className="flex justify-between text-xs text-gray-400 mt-2">
-        <span>02/04</span>
-        <span>08/04</span>
-        <span>14/04</span>
-        <span>20/04</span>
-        <span>26/04</span>
-        <span>02/05</span>
-        <span>08/05</span>
-        <span>14/05</span>
-        <span>20/05</span>
-        <span>26/05</span>
-        <span>01/06</span>
-        <span>07/06</span>
-        <span>13/06</span>
-        <span>19/06</span>
+        {chartData.filter((_, index) => {
+          // Show fewer labels for better readability
+          const step = Math.ceil(chartData.length / 6)
+          return index % step === 0 || index === chartData.length - 1
+        }).map((d, index) => (
+          <span key={index}>{new Date(d.date).toLocaleDateString('en-US', { month: '2-digit', day: '2-digit' })}</span>
+        ))}
       </div>
     </div>
   )
 }
 
 // Mock data generator
-function generateMockData() {
+function generateMockData(timeframe: '7D' | '30D' | '1Y' = '1Y') {
   const baseValue = 1500
   const data = []
   
-  for (let i = 0; i < 50; i++) {
+  // Determine data points based on timeframe
+  let dataPoints: number
+  let dateIncrement: number
+  
+  switch (timeframe) {
+    case '7D':
+      dataPoints = 7
+      dateIncrement = 1 // daily
+      break
+    case '30D':
+      dataPoints = 30
+      dateIncrement = 1 // daily
+      break
+    case '1Y':
+      dataPoints = 50
+      dateIncrement = 7 // weekly
+      break
+    default:
+      dataPoints = 50
+      dateIncrement = 7
+  }
+  
+  for (let i = 0; i < dataPoints; i++) {
     const variation = Math.sin(i * 0.1) * 200 + Math.random() * 100 - 50
     let value = baseValue + variation
     
-    // Create a jump around index 35 (like in the image)
-    if (i > 35) {
-      value += 1500
+    // Create different patterns based on timeframe
+    if (timeframe === '7D') {
+      // More volatile for 7 days
+      value += Math.random() * 400 - 200
+    } else if (timeframe === '30D') {
+      // Medium volatility for 30 days
+      value += Math.random() * 600 - 300
+      if (i > 20) value += 800 // Growth trend
+    } else {
+      // Yearly pattern with major jump (like in the original)
+      if (i > 35) {
+        value += 1500
+      }
+    }
+    
+    // Generate appropriate dates
+    const date = new Date()
+    if (timeframe === '7D') {
+      date.setDate(date.getDate() - (6 - i))
+    } else if (timeframe === '30D') {
+      date.setDate(date.getDate() - (29 - i))
+    } else {
+      date.setDate(date.getDate() - (dataPoints - 1 - i) * 7)
     }
     
     data.push({
-      date: `2024-${String(Math.floor(i / 7) + 1).padStart(2, '0')}-${String((i % 7) + 1).padStart(2, '0')}`,
+      date: date.toISOString().split('T')[0],
       value: Math.max(1000, value)
     })
   }
