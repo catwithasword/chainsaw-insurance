@@ -621,12 +621,14 @@ export default function RegisterForm() {
             <div className="flex justify-end space-x-3">
               {modalState.onConfirm ? (
                 <>
-                  <button
-                    onClick={() => setModalState({ ...modalState, isOpen: false })}
-                    className="px-4 py-2 text-gray-600 bg-gray-100 rounded hover:bg-gray-200"
-                  >
-                    Cancel
-                  </button>
+                  {modalState.type !== 'success' && (
+                    <button
+                      onClick={() => setModalState({ ...modalState, isOpen: false })}
+                      className="px-4 py-2 text-gray-600 bg-gray-100 rounded hover:bg-gray-200"
+                    >
+                      Cancel
+                    </button>
+                  )}
                   <button
                     onClick={modalState.onConfirm}
                     className={`px-4 py-2 text-white rounded hover:opacity-90 ${
