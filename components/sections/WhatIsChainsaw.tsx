@@ -5,25 +5,27 @@ export default function WhatIsChainsaw() {
     <section id="about" className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-primary mb-4">What is Chainsaw?</h2>
+          <h2 className="text-4xl font-bold text-primary mb-4">What is PensionDAO?</h2>
           <p className="text-xl text-primary/70 max-w-3xl mx-auto">
             Your trusted partner in retirement planning, providing secure and reliable annuity solutions
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
-          <div>
+        <div className="flex justify-center mb-16">
+          <div className="max-w-4xl text-center">
             <h3 className="text-2xl font-bold text-primary mb-6">Our Mission</h3>
             <p className="text-primary/70 text-lg leading-relaxed mb-6">
-              DAOs-based life insurance, or pension-linked life insurance, that allows for simultaneous investment and life insurance coverage without compromising benefits from either aspect.
+              DAOs-based life insurance, or pension-linked life insurance, that allows for simultaneous investment and
+              life insurance coverage without compromising benefits from either aspect.
             </p>
             <p className="text-primary/70 text-lg leading-relaxed">
-              At Chainsaw, we believe everyone deserves a secure and comfortable retirement. We specialize in creating
+              At PensionDAO, we believe everyone deserves a secure and comfortable retirement. We specialize in creating
               personalized annuity solutions that protect your financial future while providing guaranteed income
               streams when you need them most.
             </p>
           </div>
-          <div className="grid grid-cols-2 gap-6">
+        </div>
+          {/* <div className="grid grid-cols-2 gap-6">
             <div className="text-center">
               <div className="w-20 h-20 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Users className="h-10 w-10 text-accent" />
@@ -38,8 +40,8 @@ export default function WhatIsChainsaw() {
               <h4 className="text-xl font-semibold text-primary mb-2">50+</h4>
               <p className="text-primary/70">Years Experience</p>
             </div>
-          </div>
-        </div>
+          </div> */}
+        
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <Card className="border-neutral-gray hover:shadow-lg transition-all hover:border-accent/50 group text-center">
