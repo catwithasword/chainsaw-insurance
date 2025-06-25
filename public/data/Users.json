@@ -1,0 +1,32 @@
+{
+  "users": [
+    {
+      "id": "user_test_123456",
+      "firstName": "John",
+      "lastName": "Doe",
+      "telephone": "+1-555-123-4567",
+      "email": "john.doe@example.com",
+      "address": "123 Main Street, Anytown, ST 12345",
+      "birthDate": "1990-01-15",
+      "passportId": "AB123456",
+      "gender": "male",
+      "marriageStatus": "single",
+      "age": 34,
+      "registrationDate": "2025-06-25T10:00:00.000Z",
+      "status": "active"
+    },
+    {
+      "id": "user_mcc7lxbz_5jacxo",
+      "firstName": "asd",
+      "lastName": "Fgh",
+      "telephone": "0902731813",
+      "email": "a555050000@gmail.com",
+      "address": "23/1 esrtctyvuyhbkj",
+      "birthDate": "1999-03-15",
+      "passportId": "1209702210555",
+      "age": 26,
+      "registrationDate": "2025-06-25T17:09:32.543Z",
+      "status": "active"
+    }
+  ]
+}
