@@ -1,5 +1,9 @@
 "use client"
 import { ReactNode, useState } from 'react'
+import InsurancePlan from '@/components/dashboard/insurance/InsurancePlan'
+import PlanAChart from '@/components/dashboard/insurance/PlanAChart'
+import PlanBChart from '@/components/dashboard/insurance/PlanBChart'
+import PlanCChart from '@/components/dashboard/insurance/PlanCChart'
 
 interface DashboardLayoutProps {
   children: ReactNode
@@ -7,6 +11,26 @@ interface DashboardLayoutProps {
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const [activeTab, setActiveTab] = useState<'dashboard' | 'insurance' | 'payment'>('dashboard')
+  const [contractSigned, setContractSigned] = useState(false)
+  const [selectedPlan, setSelectedPlan] = useState<string>("")
+
+  const handleContractSigned = (planName: string) => {
+    setContractSigned(true)
+    setSelectedPlan(planName)
+  }
+
+  const renderSelectedChart = () => {
+    switch (selectedPlan) {
+      case "Plan A":
+        return <PlanAChart />
+      case "Plan B":
+        return <PlanBChart />
+      case "Plan C":
+        return <PlanCChart />
+      default:
+        return <PlanAChart /> // Default fallback
+    }
+  }
 
   return (
     <div className="min-h-screen bg-white">
@@ -52,9 +76,18 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       <div className="flex-1">
         {activeTab === 'dashboard' && children}
         {activeTab === 'insurance' && (
-          <div className="p-6 text-center">
-            <h2 className="text-2xl font-bold text-primary mb-4">Insurance</h2>
-            <p className="text-gray-600">Insurance content will be displayed here.</p>
+          <div className="p-6">
+            {!contractSigned ? (
+              <>
+                <h2 className="text-2xl font-bold text-primary mb-6 text-center">Insurance Plans</h2>
+                <InsurancePlan onContractSigned={handleContractSigned} />
+              </>
+            ) : (
+              <>
+                <h2 className="text-2xl font-bold text-primary mb-6 text-center">Your Investment Portfolio - {selectedPlan}</h2>
+                {renderSelectedChart()}
+              </>
+            )}
           </div>
         )}
         {activeTab === 'payment' && (
