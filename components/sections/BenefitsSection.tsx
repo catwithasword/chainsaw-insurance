@@ -16,7 +16,7 @@ export default function BenefitsSection() {
               <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                 <PiggyBank className="h-6 w-6 text-primary" />
               </div>
-              <CardTitle className="text-primary text-xl">Tax Advantages</CardTitle>
+              <CardTitle className="text-primary text-xl">Comparative Advantage</CardTitle>
               <CardDescription className="text-primary/70">
                 Maximize your retirement savings with significant tax benefits
               </CardDescription>
@@ -25,16 +25,16 @@ export default function BenefitsSection() {
               <ul className="space-y-3 mb-6">
                 <li className="flex items-center space-x-2">
                   <CheckCircle className="h-4 w-4 text-accent" />
-                  <span className="text-primary/70">Tax-deferred growth</span>
+                  <span className="text-primary/70">4.5x greater return compared to traditional models</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <CheckCircle className="h-4 w-4 text-accent" />
-                  <span className="text-primary/70">No annual contribution limits</span>
+                  <span className="text-primary/70">7% annual interest rate</span>
                 </li>
-                <li className="flex items-center space-x-2">
+                {/* <li className="flex items-center space-x-2">
                   <CheckCircle className="h-4 w-4 text-accent" />
                   <span className="text-primary/70">Tax-efficient income</span>
-                </li>
+                </li> */}
               </ul>
               <Button className="w-full bg-primary text-white hover:bg-primary/90">Learn More</Button>
             </CardContent>
@@ -44,7 +44,7 @@ export default function BenefitsSection() {
               <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4">
                 <Shield className="h-6 w-6 text-accent" />
               </div>
-              <CardTitle className="text-primary text-xl">Guaranteed Security</CardTitle>
+              <CardTitle className="text-primary text-xl">Decentralized System Advantage</CardTitle>
               <CardDescription className="text-primary/70">
                 Your principal and returns are protected with our guarantee
               </CardDescription>
@@ -53,15 +53,15 @@ export default function BenefitsSection() {
               <ul className="space-y-3 mb-6">
                 <li className="flex items-center space-x-2">
                   <CheckCircle className="h-4 w-4 text-accent" />
-                  <span className="text-primary/70">Principal protection</span>
+                  <span className="text-primary/70">Transparency</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <CheckCircle className="h-4 w-4 text-accent" />
-                  <span className="text-primary/70">Guaranteed minimum returns</span>
+                  <span className="text-primary/70">Financial Visibility</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <CheckCircle className="h-4 w-4 text-accent" />
-                  <span className="text-primary/70">Insurance company backing</span>
+                  <span className="text-primary/70">Governance Rights</span>
                 </li>
               </ul>
               <Button className="w-full bg-accent text-accent-foreground hover:bg-accent/90">Learn More</Button>
