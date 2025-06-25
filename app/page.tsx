@@ -118,7 +118,7 @@ export default function ChainsawAnnuityPage() {
                 Guaranteed returns, tax advantages, and lifetime income options.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 px-8 py-4">
+                <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/60 px-8 py-4">
                   Explore Annuities
                 </Button>
                 <Button
