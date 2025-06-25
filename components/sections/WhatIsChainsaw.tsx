@@ -7,8 +7,7 @@ export default function WhatIsChainsaw() {
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-primary mb-4">What is Chainsaw?</h2>
           <p className="text-xl text-primary/70 max-w-3xl mx-auto">
-            Your trusted partner in retirement planning, providing secure and reliable annuity solutions for over 50
-            years
+            Your trusted partner in retirement planning, providing secure and reliable annuity solutions
           </p>
         </div>
 
@@ -16,13 +15,12 @@ export default function WhatIsChainsaw() {
           <div>
             <h3 className="text-2xl font-bold text-primary mb-6">Our Mission</h3>
             <p className="text-primary/70 text-lg leading-relaxed mb-6">
+              DAOs-based life insurance, or pension-linked life insurance, that allows for simultaneous investment and life insurance coverage without compromising benefits from either aspect.
+            </p>
+            <p className="text-primary/70 text-lg leading-relaxed">
               At Chainsaw, we believe everyone deserves a secure and comfortable retirement. We specialize in creating
               personalized annuity solutions that protect your financial future while providing guaranteed income
               streams when you need them most.
-            </p>
-            <p className="text-primary/70 text-lg leading-relaxed">
-              With decades of experience in the financial services industry, we've helped thousands of clients achieve
-              their retirement goals through our comprehensive range of annuity products and expert financial guidance.
             </p>
           </div>
           <div className="grid grid-cols-2 gap-6">
