@@ -27,9 +27,14 @@ export default function Header() {
             <a href="#benefits" className="text-primary hover:text-accent transition-colors font-medium">
               Benefits
             </a>
-            {session && (
+            {session && (session.user as any).isRegistered && (
               <a href="/dashboard" className="text-primary hover:text-accent transition-colors font-medium">
                 Dashboard
+              </a>
+            )}
+            {session && !(session.user as any).isRegistered && (
+              <a href="/register" className="text-primary hover:text-accent transition-colors font-medium">
+                Complete Registration
               </a>
             )}
             <a href="#contact" className="text-primary hover:text-accent transition-colors font-medium">
