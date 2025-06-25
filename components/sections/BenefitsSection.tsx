@@ -1,98 +1,90 @@
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { CheckCircle, PiggyBank, Shield, Banknote } from "lucide-react"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { CheckCircle, Shield, Calculator, TrendingUp} from "lucide-react"
 
-export default function BenefitsSection() {
+export default function AnnuityTypesSection() {
   return (
-    <section id="benefits" className="py-20 bg-neutral-light">
+    <section id="products" className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-primary mb-4">Why Choose Chainsaw Annuities?</h2>
-          <p className="text-xl text-primary/70">Comprehensive benefits designed for your retirement security</p>
+          <h2 className="text-4xl font-bold text-primary mb-4">Choose Your Annuity Plan</h2>
+          <p className="text-xl text-primary/70 max-w-2xl mx-auto">
+            Different annuity options designed to meet your unique retirement goals and risk tolerance
+          </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <Card className="border-neutral-gray bg-white hover:shadow-xl transition-shadow">
-            <CardHeader>
-              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-                <PiggyBank className="h-6 w-6 text-primary" />
+          <Card className="border-neutral-gray hover:shadow-lg transition-all hover:border-accent/50 group">
+            <CardHeader className="text-center">
+              <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-accent/20 transition-colors">
+                <Shield className="h-8 w-8 text-accent" />
               </div>
-              <CardTitle className="text-primary text-xl">Comparative Advantage</CardTitle>
-              <CardDescription className="text-primary/70">
-                Maximize your retirement savings with significant tax benefits
-              </CardDescription>
+              <CardTitle className="text-primary">Plan A</CardTitle>
             </CardHeader>
             <CardContent>
-              <ul className="space-y-3 mb-6">
+              <p className="text-primary/70 text-center mb-4">(Standard)</p>
+              <ul className="text-sm text-primary/70 space-y-2">
                 <li className="flex items-center space-x-2">
                   <CheckCircle className="h-4 w-4 text-accent" />
-                  <span className="text-primary/70">4.5x greater return compared to traditional models</span>
+                  <span>Insurance premium payment period: 40-59 years old</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <CheckCircle className="h-4 w-4 text-accent" />
-                  <span className="text-primary/70">7% annual interest rate</span>
+                  <span>Payout age: 60 yeares old</span>
                 </li>
-                {/* <li className="flex items-center space-x-2">
+                <li className="flex items-center space-x-2">
                   <CheckCircle className="h-4 w-4 text-accent" />
-                  <span className="text-primary/70">Tax-efficient income</span>
-                </li> */}
+                  <span>% Annual Payout: 15%</span>
+                </li>
               </ul>
-              <Button className="w-full bg-primary text-white hover:bg-primary/90">Learn More</Button>
             </CardContent>
           </Card>
-          <Card className="border-neutral-gray bg-white hover:shadow-xl transition-shadow">
-            <CardHeader>
-              <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4">
-                <Shield className="h-6 w-6 text-accent" />
+          <Card className="border-neutral-gray hover:shadow-lg transition-all hover:border-accent/50 group">
+            <CardHeader className="text-center">
+              <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-accent/20 transition-colors">
+                <TrendingUp className="h-8 w-8 text-accent" />
               </div>
-              <CardTitle className="text-primary text-xl">Decentralized System Advantage</CardTitle>
-              <CardDescription className="text-primary/70">
-                Your principal and returns are protected with our guarantee
-              </CardDescription>
+              <CardTitle className="text-primary">Plan B</CardTitle>
             </CardHeader>
             <CardContent>
-              <ul className="space-y-3 mb-6">
+              <p className="text-primary/70 text-center mb-4">(Flex+)</p>
+              <ul className="text-sm text-primary/70 space-y-2">
                 <li className="flex items-center space-x-2">
                   <CheckCircle className="h-4 w-4 text-accent" />
-                  <span className="text-primary/70">Transparency</span>
+                  <span>Insurance premium payment period: 35-60 years old</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <CheckCircle className="h-4 w-4 text-accent" />
-                  <span className="text-primary/70">Financial Visibility</span>
+                  <span>Payout age: 60 yeares old</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <CheckCircle className="h-4 w-4 text-accent" />
-                  <span className="text-primary/70">Governance Rights</span>
+                  <span>% Annual Payout: 18%</span>
                 </li>
               </ul>
-              <Button className="w-full bg-accent text-accent-foreground hover:bg-accent/90">Learn More</Button>
             </CardContent>
           </Card>
-          <Card className="border-neutral-gray bg-white hover:shadow-xl transition-shadow">
-            <CardHeader>
-              <div className="w-12 h-12 bg-accent-dark/10 rounded-lg flex items-center justify-center mb-4">
-                <Banknote className="h-6 w-6 text-accent-dark" />
+          <Card className="border-neutral-gray hover:shadow-lg transition-all hover:border-accent/50 group">
+            <CardHeader className="text-center">
+              <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-accent/20 transition-colors">
+                <Calculator className="h-8 w-8 text-accent" />
               </div>
-              <CardTitle className="text-primary text-xl">Lifetime Income</CardTitle>
-              <CardDescription className="text-primary/70">
-                Guaranteed income that lasts as long as you live
-              </CardDescription>
+              <CardTitle className="text-primary">Plan C</CardTitle>
             </CardHeader>
             <CardContent>
-              <ul className="space-y-3 mb-6">
+              <p className="text-primary/70 text-center mb-4">(Longlife)</p>
+              <ul className="text-sm text-primary/70 space-y-2">
                 <li className="flex items-center space-x-2">
                   <CheckCircle className="h-4 w-4 text-accent" />
-                  <span className="text-primary/70">Monthly income for life</span>
+                  <span>Insurance premium payment period: 40-55 years old</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <CheckCircle className="h-4 w-4 text-accent" />
-                  <span className="text-primary/70">Inflation protection options</span>
+                  <span>Payout age: 56 yeares old</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <CheckCircle className="h-4 w-4 text-accent" />
-                  <span className="text-primary/70">Survivor benefits</span>
+                  <span>% Annual Payout: 12%</span>
                 </li>
               </ul>
-              <Button className="w-full bg-accent-dark text-white hover:bg-accent-dark/90">Learn More</Button>
             </CardContent>
           </Card>
         </div>
