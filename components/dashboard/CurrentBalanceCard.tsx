@@ -95,16 +95,6 @@ export default function CurrentBalanceCard({
             <span className="text-sm text-gray-600">Next Payment</span>
             <span className="text-sm font-medium text-gray-800">{nextPayment.toLocaleString()}.00 THB</span>
           </div>
-        </div>            
-        
-        {/* Action Buttons */}
-        <div className="space-y-3 pt-4">
-          <button className="w-full bg-primary text-white py-3 rounded-lg font-medium hover:bg-accent-dark transition-colors">
-            View Details
-          </button>
-          <button className="w-full bg-gray-100 text-gray-700 py-3 rounded-lg font-medium hover:bg-gray-200 transition-colors">
-            Transaction History
-          </button>
         </div>
       </CardContent>
     </Card>

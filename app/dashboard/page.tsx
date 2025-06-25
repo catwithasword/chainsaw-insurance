@@ -4,6 +4,7 @@ import { redirect } from "next/navigation"
 import PortfolioChart from "@/components/dashboard/PortfolioChart"
 import CurrentBalanceCard from "@/components/dashboard/CurrentBalanceCard"
 import AdditionalCards from "@/components/dashboard/AdditionalCards"
+import DashboardActions from "@/components/dashboard/DashboardActions"
 import RegistrationCheck from "@/components/RegistrationCheck"
 
 export default function DashboardPage() {
@@ -20,7 +21,7 @@ export default function DashboardPage() {
   if (!session) {
     redirect("/")
   }
-  
+
   return (
     <RegistrationCheck>
       <div className="min-h-screen bg-white">
@@ -37,8 +38,14 @@ export default function DashboardPage() {
               <div className="w-full max-w-lg space-y-6">
                 <PortfolioChart />
                 <AdditionalCards />
-              </div>            </div>
+              </div>            
+            </div>
           </div>
+        </div>
+
+        {/* Dashboard Actions - Outside Main Content */}
+        <div className="pt-6">
+          <DashboardActions />
         </div>
       </div>
     </RegistrationCheck>
