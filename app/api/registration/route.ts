@@ -1,7 +1,26 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
-import fs from 'fs'
-import path from 'path'
+import { createClient } from 'redis'
+
+// Create Redis client
+const redis = createClient({
+  url: process.env.REDIS_URL || process.env.KV_URL
+})
+
+// Connect to Redis (with error handling)
+let isConnected = false
+const connectRedis = async () => {
+  if (!isConnected) {
+    try {
+      await redis.connect()
+      isConnected = true
+      console.log('Redis connected successfully')
+    } catch (error) {
+      console.error('Redis connection error:', error)
+      throw error
+    }
+  }
+}
 
 // Zod schema for validating registration data
 const registerSchema = z.object({
@@ -54,26 +73,82 @@ type UserData = z.infer<typeof registerSchema> & {
   status: 'active' | 'pending' | 'inactive'
 }
 
-// Helper function to read users from JSON file
-function readUsersFromFile(): { users: UserData[] } {
+// Helper function to get all users from Redis
+async function getAllUsers(): Promise<UserData[]> {
   try {
-    const filePath = path.join(process.cwd(), 'public', 'data', 'Users.json')
-    const fileContent = fs.readFileSync(filePath, 'utf8')
-    return JSON.parse(fileContent)
+    await connectRedis()
+    const usersJson = await redis.get('users:all')
+    return usersJson ? JSON.parse(usersJson) : []
   } catch (error) {
-    console.error('Error reading users file:', error)
-    return { users: [] }
+    console.error('Error reading users from Redis:', error)
+    return []
   }
 }
 
-// Helper function to write users to JSON file
-function writeUsersToFile(data: { users: UserData[] }): boolean {
+// Helper function to save all users to Redis
+async function saveAllUsers(users: UserData[]): Promise<boolean> {
   try {
-    const filePath = path.join(process.cwd(), 'public', 'data', 'Users.json')
-    fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf8')
+    await connectRedis()
+    await redis.set('users:all', JSON.stringify(users))
     return true
   } catch (error) {
-    console.error('Error writing users file:', error)
+    console.error('Error saving users to Redis:', error)
+    return false
+  }
+}
+
+// Helper function to check if email exists
+async function emailExists(email: string): Promise<UserData | null> {
+  try {
+    await connectRedis()
+    const userId = await redis.get(`user:email:${email.toLowerCase()}`)
+    if (userId) {
+      const userJson = await redis.get(`user:${userId}`)
+      return userJson ? JSON.parse(userJson) : null
+    }
+    return null
+  } catch (error) {
+    console.error('Error checking email existence:', error)
+    return null
+  }
+}
+
+// Helper function to check if passport ID exists
+async function passportExists(passportId: string): Promise<UserData | null> {
+  try {
+    await connectRedis()
+    const userId = await redis.get(`user:passport:${passportId.toUpperCase()}`)
+    if (userId) {
+      const userJson = await redis.get(`user:${userId}`)
+      return userJson ? JSON.parse(userJson) : null
+    }
+    return null
+  } catch (error) {
+    console.error('Error checking passport existence:', error)
+    return null
+  }
+}
+
+// Helper function to save user to Redis
+async function saveUser(user: UserData): Promise<boolean> {
+  try {
+    await connectRedis()
+    
+    // Save user data
+    await redis.set(`user:${user.id}`, JSON.stringify(user))
+    
+    // Create indexes for email and passport
+    await redis.set(`user:email:${user.email.toLowerCase()}`, user.id)
+    await redis.set(`user:passport:${user.passportId.toUpperCase()}`, user.id)
+    
+    // Update the all users list
+    const allUsers = await getAllUsers()
+    allUsers.push(user)
+    await saveAllUsers(allUsers)
+    
+    return true
+  } catch (error) {
+    console.error('Error saving user to Redis:', error)
     return false
   }
 }
@@ -83,16 +158,6 @@ function generateUserId(): string {
   const timestamp = Date.now().toString(36)
   const randomStr = Math.random().toString(36).substring(2, 8)
   return `user_${timestamp}_${randomStr}`
-}
-
-// Helper function to check if email already exists
-function emailExists(email: string, users: UserData[]): boolean {
-  return users.some(user => user.email.toLowerCase() === email.toLowerCase())
-}
-
-// Helper function to check if passport ID already exists
-function passportExists(passportId: string, users: UserData[]): boolean {
-  return users.some(user => user.passportId.toUpperCase() === passportId.toUpperCase())
 }
 
 export async function POST(request: NextRequest) {
@@ -122,12 +187,9 @@ export async function POST(request: NextRequest) {
     const userData = validationResult.data
     console.log('Validated user data:', userData)
 
-    // Read existing users
-    const usersData = readUsersFromFile()
-    console.log('Current users count:', usersData.users.length)
-      // Check if email already exists
-    if (emailExists(userData.email, usersData.users)) {
-      const existingUser = usersData.users.find(user => user.email.toLowerCase() === userData.email.toLowerCase())
+    // Check if email already exists
+    const existingEmailUser = await emailExists(userData.email)
+    if (existingEmailUser) {
       return NextResponse.json(
         {
           success: false,
@@ -135,10 +197,10 @@ export async function POST(request: NextRequest) {
           action: 'login',
           field: 'email',
           user: {
-            id: existingUser?.id,
-            firstName: existingUser?.firstName,
-            lastName: existingUser?.lastName,
-            email: existingUser?.email
+            id: existingEmailUser.id,
+            firstName: existingEmailUser.firstName,
+            lastName: existingEmailUser.lastName,
+            email: existingEmailUser.email
           }
         },
         { status: 409 }
@@ -146,8 +208,8 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if passport ID already exists
-    if (passportExists(userData.passportId, usersData.users)) {
-      const existingUser = usersData.users.find(user => user.passportId.toUpperCase() === userData.passportId.toUpperCase())
+    const existingPassportUser = await passportExists(userData.passportId)
+    if (existingPassportUser) {
       return NextResponse.json(
         {
           success: false,
@@ -155,10 +217,10 @@ export async function POST(request: NextRequest) {
           action: 'login',
           field: 'passportId',
           user: {
-            id: existingUser?.id,
-            firstName: existingUser?.firstName,
-            lastName: existingUser?.lastName,
-            email: existingUser?.email
+            id: existingPassportUser.id,
+            firstName: existingPassportUser.firstName,
+            lastName: existingPassportUser.lastName,
+            email: existingPassportUser.email
           }
         },
         { status: 409 }
@@ -172,16 +234,12 @@ export async function POST(request: NextRequest) {
     }
     console.log('New user object created:', { ...newUser, passportId: '[HIDDEN]' })
 
-    // Add new user to the list
-    usersData.users.push(newUser)
-    console.log('User added to list, total users:', usersData.users.length)
-
-    // Write updated data back to file
-    const writeSuccess = writeUsersToFile(usersData)
-    console.log('Write to file result:', writeSuccess)
+    // Save user to Redis store
+    const saveSuccess = await saveUser(newUser)
+    console.log('Save to Redis result:', saveSuccess)
     
-    if (!writeSuccess) {
-      console.error('Failed to write to Users.json file')
+    if (!saveSuccess) {
+      console.error('Failed to save user data to Redis')
       return NextResponse.json(
         {
           success: false,
@@ -227,12 +285,12 @@ export async function POST(request: NextRequest) {
 export async function GET(request: NextRequest) {
   try {
     // This endpoint could be used to get user statistics or validation
-    const usersData = readUsersFromFile()
+    const allUsers = await getAllUsers()
     
     return NextResponse.json(
       {
         success: true,
-        totalUsers: usersData.users.length,
+        totalUsers: allUsers.length,
         message: 'Users data retrieved successfully'
       },
       { status: 200 }
