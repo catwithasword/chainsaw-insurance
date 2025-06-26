@@ -16,23 +16,29 @@ export default function Header() {
   return (
     <header className="sticky top-0 bg-white/95 backdrop-blur-sm shadow-md border-b border-neutral-gray z-50">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <div className="flex items-center space-x-2">
+        <a href="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity cursor-pointer">
           <Bird className="h-8 w-8 text-accent" />
           <span className="text-2xl font-bold text-primary">PensionDAO</span>
-        </div>        <div className="flex items-center space-x-8">
+        </a>        
+        <div className="flex items-center space-x-8">
           <nav className="hidden md:flex space-x-8">
-            <a href="#products" className="text-primary hover:text-accent transition-colors font-medium">
+            <a href="/#products" className="text-primary hover:text-accent transition-colors font-medium">
               Annuity Plans
             </a>
-            <a href="#benefits" className="text-primary hover:text-accent transition-colors font-medium">
+            <a href="/#benefits" className="text-primary hover:text-accent transition-colors font-medium">
               Benefits
             </a>
-            {session && (
+            {session && (session.user as any).isRegistered && (
               <a href="/dashboard" className="text-primary hover:text-accent transition-colors font-medium">
                 Dashboard
               </a>
             )}
-            <a href="#contact" className="text-primary hover:text-accent transition-colors font-medium">
+            {session && !(session.user as any).isRegistered && (
+              <a href="/register" className="text-primary hover:text-accent transition-colors font-medium">
+                Complete Registration
+              </a>
+            )}
+            <a href="/#contact" className="text-primary hover:text-accent transition-colors font-medium">
               Contact
             </a>
           </nav>

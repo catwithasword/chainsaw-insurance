@@ -2,9 +2,16 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card"
 
 // Custom circular progress component
 function CircularProgress({ value, max, className }: { value: number, max: number, className?: string }) {
-  const percentage = (value / max) * 100
   const circumference = 2 * Math.PI * 45 // radius of 45
-  const strokeDashoffset = circumference - (percentage / 100) * circumference
+  
+  // 80% primary color segment
+  const primaryPercentage = 80
+  const primaryStrokeDasharray = `${(primaryPercentage / 100) * circumference} ${circumference}`
+  
+  // 20% amber-400 segment
+  const amberPercentage = 20
+  const amberStrokeDasharray = `${(amberPercentage / 100) * circumference} ${circumference}`
+  const amberStrokeDashoffset = -((primaryPercentage / 100) * circumference)
 
   return (
     <div className={`relative ${className}`}>
@@ -18,25 +25,29 @@ function CircularProgress({ value, max, className }: { value: number, max: numbe
           strokeWidth="8"
           fill="transparent"
         />        
-        {/* Progress circle */}
+        {/* Primary color segment (80%) */}
         <circle
           cx="50"
           cy="50"
           r="45"
-          stroke="#292655"
+          stroke="hsl(var(--primary))"
           strokeWidth="8"
           fill="transparent"
-          strokeDasharray={circumference}
-          strokeDashoffset={strokeDashoffset}
+          strokeDasharray={primaryStrokeDasharray}
           strokeLinecap="round"
           className="transition-all duration-300 ease-in-out"
         />
-        {/* Small indicator */}
+        {/* Amber segment (20%) */}
         <circle
-          cx="73"
-          cy="27"
-          r="3"
-          fill="#507EB4"
+          cx="50"
+          cy="50"
+          r="45"
+          stroke="#fbbf24"
+          strokeWidth="8"
+          fill="transparent"
+          strokeDasharray={amberStrokeDasharray}
+          strokeDashoffset={amberStrokeDashoffset}
+          className="transition-all duration-300 ease-in-out"
         />
       </svg>
     </div>
@@ -53,8 +64,8 @@ interface CurrentBalanceCardProps {
 }
 
 export default function CurrentBalanceCard({
-  currentBalance = 160000,
-  totalBalance = 180000,
+  currentBalance = 180000,
+  totalBalance = 160000,
   interestRate = 2.82,
   monthlyAmount = 1800,
   lastUpdated = "10 Mar 2023",
@@ -88,23 +99,13 @@ export default function CurrentBalanceCard({
         {/* Account Details */}
         <div className="space-y-3 border-t pt-4">
           <div className="flex justify-between items-center">
-            <span className="text-sm text-gray-600">Last Updated</span>
+            <span className="text-sm text-gray-600">From</span>
             <span className="text-sm font-medium text-gray-800">{lastUpdated}</span>
           </div>
           <div className="flex justify-between items-center">
-            <span className="text-sm text-gray-600">Next Payment</span>
+            <span className="text-sm text-gray-600">Accrued Interest</span>
             <span className="text-sm font-medium text-gray-800">{nextPayment.toLocaleString()}.00 THB</span>
           </div>
-        </div>            
-        
-        {/* Action Buttons */}
-        <div className="space-y-3 pt-4">
-          <button className="w-full bg-primary text-white py-3 rounded-lg font-medium hover:bg-accent-dark transition-colors">
-            View Details
-          </button>
-          <button className="w-full bg-gray-100 text-gray-700 py-3 rounded-lg font-medium hover:bg-gray-200 transition-colors">
-            Transaction History
-          </button>
         </div>
       </CardContent>
     </Card>
