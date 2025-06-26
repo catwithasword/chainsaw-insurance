@@ -6,8 +6,8 @@ export default function Comparison() {
     <section className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-primary mb-4">How PensionDAO Compares</h2>
-          <p className="text-xl text-primary/70">See why PensionDAO is the superior choice for your retirement</p>
+          <h2 className="text-4xl font-bold text-primary mb-4">Why Settle for 3%?</h2>
+          <p className="text-xl text-primary/70">PensionDAO Is the Future of Annuities</p>
         </div>
 
         <div className="overflow-x-auto">
