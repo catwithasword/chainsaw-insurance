@@ -1,16 +1,34 @@
 import { NextAuthOptions, User, Session } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { JWT } from "next-auth/jwt";
-import fs from 'fs';
-import path from 'path';
+import { createClient } from 'redis';
 
-// Helper function to check if user exists in Users.json
-function checkUserExists(email: string): boolean {
+// Create Redis client
+const redis = createClient({
+  url: process.env.REDIS_URL || process.env.KV_URL
+});
+
+// Connect to Redis (with error handling)
+let isConnected = false;
+const connectRedis = async () => {
+  if (!isConnected) {
+    try {
+      await redis.connect();
+      isConnected = true;
+      console.log('Redis connected successfully for auth');
+    } catch (error) {
+      console.error('Redis connection error in auth:', error);
+      throw error;
+    }
+  }
+};
+
+// Helper function to check if user exists in Redis
+async function checkUserExists(email: string): Promise<boolean> {
   try {
-    const filePath = path.join(process.cwd(), 'public', 'data', 'Users.json');
-    const fileContent = fs.readFileSync(filePath, 'utf8');
-    const data = JSON.parse(fileContent);
-    const exists = data.users.some((user: any) => user.email.toLowerCase() === email.toLowerCase());
+    await connectRedis();
+    const userId = await redis.get(`user:email:${email.toLowerCase()}`);
+    const exists = !!userId;
     console.log(`Checking user existence for ${email}: ${exists}`);
     return exists;
   } catch (error) {
@@ -50,8 +68,8 @@ export const authOptions: NextAuthOptions = {
       
       // Only check for Google sign-ins
       if (account?.provider === 'google' && user.email) {
-        const userExists = checkUserExists(user.email);
-        console.log('User exists in Users.json:', userExists);
+        const userExists = await checkUserExists(user.email);
+        console.log('User exists in Redis:', userExists);
         
         if (!userExists) {
           console.log('User not registered, should redirect to registration');
@@ -71,7 +89,7 @@ export const authOptions: NextAuthOptions = {
         
         // Check if user is registered when creating the token
         if (user.email) {
-          token.isRegistered = checkUserExists(user.email);
+          token.isRegistered = await checkUserExists(user.email);
         }
       }
       return token;
