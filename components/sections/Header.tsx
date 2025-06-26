@@ -3,13 +3,22 @@ import { Button } from "@/components/ui/button"
 import { Bird, Wallet } from "lucide-react"
 import { signIn, signOut, useSession } from "next-auth/react"
 import Image from "next/image"
+import { connectWallet } from "@/utils/connectWallet"
+import { useState } from "react"
 
 export default function Header() {
   const { data: session, status } = useSession()
+  const [walletAddress, setWalletAddress] = useState<string | null>(null);
   const handleSignIn = () => {
     signIn("google", { callbackUrl: "/dashboard" })
   }
 
+  const handleConnectWallet = async () => {
+  const address = await connectWallet();
+  if (address) {
+    setWalletAddress(address);
+  }
+};
   const handleSignOut = () => {    
     signOut()
   }
@@ -57,9 +66,11 @@ export default function Header() {
               >
                 Sign Out
               </Button>
-              <Button className="bg-accent text-accent-foreground hover:bg-accent/90 flex items-center">
-                <Wallet className="h-4 w-4" />
-                <span>Connect Wallet</span>
+              <Button 
+              onClick={handleConnectWallet}
+              className="bg-accent text-accent-foreground hover:bg-accent/90 flex items-center space-x-2">
+              <Wallet className="h-4 w-4" />
+              <span>{walletAddress ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}` : "Connect Wallet"}</span>
               </Button>
             </div>
           ) : (
