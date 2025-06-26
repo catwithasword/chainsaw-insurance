@@ -28,7 +28,7 @@ export default function AnnuityTypesSection() {
                 </li>
                 <li className="flex items-center space-x-2">
                   <CheckCircle className="h-4 w-4 text-accent" />
-                  <span>Payout age: 60 yeares old</span>
+                  <span>Payout age: 60 year old</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <CheckCircle className="h-4 w-4 text-accent" />
@@ -53,7 +53,7 @@ export default function AnnuityTypesSection() {
                 </li>
                 <li className="flex items-center space-x-2">
                   <CheckCircle className="h-4 w-4 text-accent" />
-                  <span>Payout age: 60 yeares old</span>
+                  <span>Payout age: 60 years old</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <CheckCircle className="h-4 w-4 text-accent" />
@@ -78,7 +78,7 @@ export default function AnnuityTypesSection() {
                 </li>
                 <li className="flex items-center space-x-2">
                   <CheckCircle className="h-4 w-4 text-accent" />
-                  <span>Payout age: 56 yeares old</span>
+                  <span>Payout age: 56 years old</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <CheckCircle className="h-4 w-4 text-accent" />
