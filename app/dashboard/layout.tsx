@@ -4,6 +4,7 @@ import InsurancePlan from '@/components/dashboard/insurance/InsurancePlan'
 import PlanAChart from '@/components/dashboard/insurance/PlanAChart'
 import PlanBChart from '@/components/dashboard/insurance/PlanBChart'
 import PlanCChart from '@/components/dashboard/insurance/PlanCChart'
+import PaymentWallet from '@/components/dashboard/payment/PaymentWallet'
 
 interface DashboardLayoutProps {
   children: ReactNode
@@ -91,9 +92,8 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           </div>
         )}
         {activeTab === 'payment' && (
-          <div className="p-6 text-center">
-            <h2 className="text-2xl font-bold text-primary mb-4">Payment</h2>
-            <p className="text-gray-600">Payment content will be displayed here.</p>
+          <div className="p-6">
+            <PaymentWallet />
           </div>
         )}
       </div>
