@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { CheckCircle, TrendingUp, Network, Coins } from "lucide-react"
+import { TrendingUp, Network, Blend } from "lucide-react"
 
 export default function BenefitsSection() {
   return (
@@ -16,26 +16,26 @@ export default function BenefitsSection() {
               <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4">
                 <TrendingUp className="h-6 w-6 text-accent" />
               </div>
-              <CardTitle className="text-primary text-xl">Comparative Advantage</CardTitle>
+              <CardTitle className="text-primary text-xl">Higher Yield (guarantee APY)</CardTitle>
               <CardDescription className="text-primary/70">
-                Maximize your retirement savings with significant tax benefits
+                Earn more than traditional annuities with real on-chain yield
               </CardDescription>
             </CardHeader>
             <CardContent className="flex flex-col flex-1">
-              <ul className="space-y-3 mb-6 flex-1">
-                <li className="flex items-center space-x-2">
-                  <CheckCircle className="h-4 w-4 text-accent" />
-                  <span className="text-primary/70">4.5x greater return compared to traditional models</span>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <CheckCircle className="h-4 w-4 text-accent" />
-                  <span className="text-primary/70">7% annual interest rate</span>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <CheckCircle className="h-4 w-4 text-accent" />
-                  <span className="text-primary/70">Tax-efficient income</span>
-                </li>
-              </ul>
+              <Button className="w-full bg-primary text-white hover:bg-primary/90 mt-auto">Learn More</Button>
+            </CardContent>
+          </Card>
+          <Card className="border-neutral-gray bg-white hover:shadow-xl transition-shadow flex flex-col h-full">
+            <CardHeader>
+              <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4">
+                <Blend className="h-6 w-6 text-accent" />
+              </div>
+              <CardTitle className="text-primary text-xl">Transaparent</CardTitle>
+              <CardDescription className="text-primary/70">
+                Track your money in real time, see how Daos invests it, where, and why
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="flex flex-col flex-1">
               <Button className="w-full bg-primary text-white hover:bg-primary/90 mt-auto">Learn More</Button>
             </CardContent>
           </Card>
@@ -44,54 +44,12 @@ export default function BenefitsSection() {
               <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4">
                 <Network className="h-6 w-6 text-accent" />
               </div>
-              <CardTitle className="text-primary text-xl">Decentralized System Advantage</CardTitle>
+              <CardTitle className="text-primary text-xl">Decentralized & Trustless</CardTitle>
               <CardDescription className="text-primary/70">
-                Your principal and returns are protected with our guarantee
+                You don’t rely on institutions — you rely on code and community
               </CardDescription>
             </CardHeader>
             <CardContent className="flex flex-col flex-1">
-              <ul className="space-y-3 mb-6 flex-1">
-                <li className="flex items-center space-x-2">
-                  <CheckCircle className="h-4 w-4 text-accent" />
-                  <span className="text-primary/70">Transparency</span>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <CheckCircle className="h-4 w-4 text-accent" />
-                  <span className="text-primary/70">Financial Visibility</span>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <CheckCircle className="h-4 w-4 text-accent" />
-                  <span className="text-primary/70">Governance Rights</span>
-                </li>
-              </ul>
-              <Button className="w-full bg-primary text-white hover:bg-primary/90 mt-auto">Learn More</Button>
-            </CardContent>
-          </Card>
-          <Card className="border-neutral-gray bg-white hover:shadow-xl transition-shadow flex flex-col h-full">
-            <CardHeader>
-              <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4">
-                <Coins className="h-6 w-6 text-accent" />
-              </div>
-              <CardTitle className="text-primary text-xl">Lifetime Income</CardTitle>
-              <CardDescription className="text-primary/70">
-                Guaranteed income that lasts as long as you live
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="flex flex-col flex-1">
-              <ul className="space-y-3 mb-6 flex-1">
-                <li className="flex items-center space-x-2">
-                  <CheckCircle className="h-4 w-4 text-accent" />
-                  <span className="text-primary/70">Monthly income for life</span>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <CheckCircle className="h-4 w-4 text-accent" />
-                  <span className="text-primary/70">Inflation protection options</span>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <CheckCircle className="h-4 w-4 text-accent" />
-                  <span className="text-primary/70">Survivor benefits</span>
-                </li>
-              </ul>
               <Button className="w-full bg-primary text-white hover:bg-primary/90 mt-auto">Learn More</Button>
             </CardContent>
           </Card>
