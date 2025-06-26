@@ -60,11 +60,11 @@ export default function InsurancePlan({ onContractSigned }: InsurancePlanProps) 
             </li>
             <li className="flex items-center space-x-2">
               <CheckCircle className="h-4 w-4 text-accent" />
-              <span>Payout age: 60 yeares old</span>
+              <span>Payout age: 60 years old</span>
             </li>
             <li className="flex items-center space-x-2">
               <CheckCircle className="h-4 w-4 text-accent" />
-              <span>% Annual Payout: 15%</span>
+              <span>% Annual Payout: 7%</span>
             </li>
           </ul>
           <Dialog>
@@ -225,11 +225,11 @@ export default function InsurancePlan({ onContractSigned }: InsurancePlanProps) 
             </li>
             <li className="flex items-center space-x-2">
               <CheckCircle className="h-4 w-4 text-accent" />
-              <span>Payout age: 60 yeares old</span>
+              <span>Payout age: 60 years old</span>
             </li>
             <li className="flex items-center space-x-2">
               <CheckCircle className="h-4 w-4 text-accent" />
-              <span>% Annual Payout: 18%</span>
+              <span>% Annual Payout: depend</span>
             </li>
           </ul>
           <Dialog>
@@ -390,11 +390,11 @@ export default function InsurancePlan({ onContractSigned }: InsurancePlanProps) 
             </li>
             <li className="flex items-center space-x-2">
               <CheckCircle className="h-4 w-4 text-accent" />
-              <span>Payout age: 56 yeares old</span>
+              <span>Payout age: 56 years old</span>
             </li>
             <li className="flex items-center space-x-2">
               <CheckCircle className="h-4 w-4 text-accent" />
-              <span>% Annual Payout: 12%</span>
+              <span>% Annual Payout: 6.5%</span>
             </li>
           </ul>
           <Dialog>
