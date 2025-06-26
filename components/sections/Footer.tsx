@@ -1,4 +1,4 @@
-import { Shield, Phone, Mail, MapPin, Facebook, Twitter, Linkedin } from "lucide-react"
+import { Bird, Phone, Mail, MapPin, Facebook, Twitter, Linkedin } from "lucide-react"
 
 export default function Footer() {
   return (
@@ -8,7 +8,7 @@ export default function Footer() {
           {/* Company Branding - Left Side */}
           <div className="lg:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <Shield className="h-8 w-8 text-accent" />
+              <Bird className="h-8 w-8 text-accent" />
               <span className="text-2xl font-bold">PensionDAO</span>
             </div>
             <p className="opacity-80 mb-6 text-sm leading-relaxed">
@@ -51,7 +51,7 @@ export default function Footer() {
         {/* Bottom Copyright Section */}
         <div className="border-t border-accent/20 mt-12 pt-8 text-center">
           <p className="text-sm opacity-60">
-            © 2024 PensionDAO Annuities. All rights reserved. | Privacy Policy | Terms of Service
+            © 2025 PensionDAO Annuities. All rights reserved.
           </p>
         </div>
       </div>

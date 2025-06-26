@@ -1,15 +1,24 @@
 "use client"
 import { Button } from "@/components/ui/button"
-import { Shield, Wallet } from "lucide-react"
+import { Bird, Wallet } from "lucide-react"
 import { signIn, signOut, useSession } from "next-auth/react"
 import Image from "next/image"
+import { connectWallet } from "@/utils/connectWallet"
+import { useState } from "react"
 
 export default function Header() {
   const { data: session, status } = useSession()
+  const [walletAddress, setWalletAddress] = useState<string | null>(null);
   const handleSignIn = () => {
     signIn("google", { callbackUrl: "/dashboard" })
   }
 
+  const handleConnectWallet = async () => {
+  const address = await connectWallet();
+  if (address) {
+    setWalletAddress(address);
+  }
+};
   const handleSignOut = () => {    
     signOut()
   }
@@ -17,7 +26,7 @@ export default function Header() {
     <header className="sticky top-0 bg-white/95 backdrop-blur-sm shadow-md border-b border-neutral-gray z-50">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <a href="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity cursor-pointer">
-          <Shield className="h-8 w-8 text-accent" />
+          <Bird className="h-8 w-8 text-accent" />
           <span className="text-2xl font-bold text-primary">PensionDAO</span>
         </a>        
         <div className="flex items-center space-x-8">
@@ -57,9 +66,11 @@ export default function Header() {
               >
                 Sign Out
               </Button>
-              <Button className="bg-accent text-accent-foreground hover:bg-accent/90 flex items-center">
-                <Wallet className="h-4 w-4" />
-                <span>Connect Wallet</span>
+              <Button 
+              onClick={handleConnectWallet}
+              className="bg-accent text-accent-foreground hover:bg-accent/90 flex items-center space-x-2">
+              <Wallet className="h-4 w-4" />
+              <span>{walletAddress ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}` : "Connect Wallet"}</span>
               </Button>
             </div>
           ) : (
