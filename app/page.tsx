@@ -6,12 +6,14 @@ import HowItWorksSection from "@/components/sections/HowItWorksSection"
 import CTASection from "@/components/sections/CTASection"
 import Footer from "@/components/sections/Footer"
 import WhatIsChainsaw from "@/components/sections/WhatIsChainsaw"
+import Comparison from "@/components/sections/Comparison"
 export default function ChainsawAnnuityPage() {
   return (
     <div className="min-h-screen bg-neutral-light">
       <HeroSection />
       <WhatIsChainsaw />
       <BenefitsSection />
+      <Comparison />
       <AnnuityTypesSection />
       <HowItWorksSection />
       <CTASection />
