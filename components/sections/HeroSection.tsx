@@ -172,7 +172,8 @@ export default function HeroSection() {
                   <option value="variable">Variable Annuity</option>
                   <option value="indexed">Indexed Annuity</option>
                   <option value="immediate">Immediate Annuity</option>
-                </select>                <Button 
+                </select>                
+                <Button 
                   type="submit"
                   className="w-full bg-accent text-accent-foreground hover:bg-accent/90 py-3"
                 >

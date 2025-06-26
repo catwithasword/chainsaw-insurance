@@ -18,7 +18,7 @@ export default function Header() {
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <a href="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity cursor-pointer">
           <Shield className="h-8 w-8 text-accent" />
-          <span className="text-2xl font-bold text-primary">Chainsaw</span>
+          <span className="text-2xl font-bold text-primary">PensionDAO</span>
         </a>        
         <div className="flex items-center space-x-8">
           <nav className="hidden md:flex space-x-8">
