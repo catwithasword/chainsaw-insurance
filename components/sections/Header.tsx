@@ -1,6 +1,6 @@
 "use client"
 import { Button } from "@/components/ui/button"
-import { Shield, Wallet } from "lucide-react"
+import { Bird, Wallet } from "lucide-react"
 import { signIn, signOut, useSession } from "next-auth/react"
 import Image from "next/image"
 
@@ -17,7 +17,7 @@ export default function Header() {
     <header className="sticky top-0 bg-white/95 backdrop-blur-sm shadow-md border-b border-neutral-gray z-50">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <div className="flex items-center space-x-2">
-          <Shield className="h-8 w-8 text-accent" />
+          <Bird className="h-8 w-8 text-accent" />
           <span className="text-2xl font-bold text-primary">PensionDAO</span>
         </div>        <div className="flex items-center space-x-8">
           <nav className="hidden md:flex space-x-8">

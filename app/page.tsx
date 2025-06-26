@@ -11,8 +11,8 @@ export default function ChainsawAnnuityPage() {
     <div className="min-h-screen bg-neutral-light">
       <HeroSection />
       <WhatIsChainsaw />
-      <AnnuityTypesSection />
       <BenefitsSection />
+      <AnnuityTypesSection />
       <HowItWorksSection />
       <CTASection />
       <Footer />

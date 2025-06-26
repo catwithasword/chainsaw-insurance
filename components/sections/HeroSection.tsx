@@ -87,11 +87,10 @@ export default function HeroSection() {
           <div>
             <Badge className="mb-6 bg-accent text-accent-foreground">Retirement • Security • Growth</Badge>
             <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-              Secure Your Retirement with <span className="text-accent">Guaranteed Annuities</span>
+              Own Your Future with <span className="text-accent">High-Yield, Blockchain-Based Annuities</span>
             </h1>
             <p className="text-xl mb-8 leading-relaxed opacity-90">
-              Build a reliable income stream for your golden years with our comprehensive annuity insurance plans.
-              Guaranteed returns, tax advantages, and lifetime income options.
+              Earn more. Own more. The first blockchain-based annuity protocol that gives you higher yield, full transparency, and global access — governed by the people.
             </p>            <div className="flex flex-col sm:flex-row gap-4">
               <Button 
                 size="lg" 

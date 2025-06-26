@@ -51,7 +51,7 @@ export default function Footer() {
         {/* Bottom Copyright Section */}
         <div className="border-t border-accent/20 mt-12 pt-8 text-center">
           <p className="text-sm opacity-60">
-            © 2024 PensionDAO Annuities. All rights reserved. | Privacy Policy | Terms of Service
+            © 2025 PensionDAO Annuities. All rights reserved.
           </p>
         </div>
       </div>

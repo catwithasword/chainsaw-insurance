@@ -25,7 +25,7 @@ export default function BenefitsSection() {
               <ul className="space-y-3 mb-6 flex-1">
                 <li className="flex items-center space-x-2">
                   <CheckCircle className="h-4 w-4 text-accent" />
-                  <span className="text-primary/70">4.5x greater return compared to traditional models</span>
+                  <span className="text-primary/70">4.5x greater return</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <CheckCircle className="h-4 w-4 text-accent" />
