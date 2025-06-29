@@ -13,6 +13,10 @@ import ConnectButton from "@/components/ui/ConnectButton";
 export default function ChainsawAnnuityPage() {
   return (
     <div className="min-h-screen bg-neutral-light">
+      <div className="p-4">
+        <ConnectButton />
+      </div>
+ main
       <HeroSection />
       <WhatIsChainsaw />
       <BenefitsSection />
