@@ -37,6 +37,9 @@ export default function Header() {
             <a href="/#benefits" className="text-primary hover:text-accent transition-colors font-medium">
               Benefits
             </a>
+            <a href="/#calculator" className="text-primary hover:text-accent transition-colors font-medium">
+              Calculator
+            </a>
             {session && (session.user as any).isRegistered && (
               <a href="/dashboard" className="text-primary hover:text-accent transition-colors font-medium">
                 Dashboard
